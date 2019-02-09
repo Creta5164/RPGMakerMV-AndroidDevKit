@@ -96,7 +96,9 @@ If you keep running your application in connected your Android device then...
 Open the Chrome, and goto `chrome://inspect`.
 
 And some seconds later you can see your device in list!  
-Click the `Inspect` and checkout console's log.
+Click the `Inspect` and checkout console's log.  
+![](img/inspect.png)
+- Note : Inspect debugger can't show game screen (canvas). watch your Android device!
 
 More remote debug information in here.  
 https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews
