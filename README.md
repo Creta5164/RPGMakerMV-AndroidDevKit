@@ -31,37 +31,37 @@ This plugin must be in first line of the plugin list.
 
 Create project with `Empty activity` at here.  
 
-![](img\package-name.png)  
+![](img/package-name.png)  
 Remind your package name.
 
 Set activity's name to `MainView` and layout's name to `activity_main_view`.  
 
 When Android studio is finish to create project (include Gradle jobs), change project view.  
 Click Project tab, and click to select dropdown to Android.  
-![](img\change-view.png)
+![](img/change-view.png)
 
 Now, copy `AndroidRequirements/AndroidManifest.xml` contents to your manifest file.  
 You must replace `YOUR_PACKAGE_NAME_HERE` to your package name.  
-![](img\manifest.png)
+![](img/manifest.png)
 
 And copy `AndroidRequirements/styles.xml` to overwrite your `styles.xml`.  
-![](img\styles.png)  
+![](img/styles.png)  
 Also copy `AndroidRequirements/styles.xml` to overwrite your `activity_main_view.xml`.
-![](img\layout.png)
+![](img/layout.png)
 
 If there is no red text in AndroidManifest.xml, it's a success.
 
 Let's open `MainView`.  
-![](img\mainviewloc.png)
+![](img/mainviewloc.png)
 
 Same before works, copy `AndroidRequirements/MainView.java` contents to replace here.  
 Also must replace `YOUR_PACKAGE_NAME_HERE` to your package name.  
-![](img\mainview.png)
+![](img/mainview.png)
 
 We almost done this job, let's create `assets` directory.  
 (Right click res directory, `New - directory - Assets directory`)  
 When dialog shows up, just click `Finish` to finish Android job.
-![](img\create-assets-directory.png)
+![](img/create-assets-directory.png)
 
 ## Finalize
 
@@ -70,22 +70,22 @@ to your Android project's `assets` directory path.
 
 Then, run `Start Package.bat`.  
 Packager will copy and comparing to your MV project to your Android project.
-![](img\packager.png)
+![](img/packager.png)
 
 If packager is finish to work, you can see MV files successfully added
 your Android project's `assets` folder.  
-![](img\assets.png)  
+![](img/assets.png)  
 
 If anything can't find in `assets` folder, right click `assets` folder
 and click `Synchornize 'assets'`.  
-![](img\sync.png)
+![](img/sync.png)
 
 ## Testing
 
 Yes! now finally done!  
 Connect your android phone to your computer via USB
 (with Developer mode enabled), and hit green play icon button.  
-![](img\test.png)  
+![](img/test.png)  
 then, select your device and enjoy your game.
 
 > ...wait, some MV plugin error occured!  
