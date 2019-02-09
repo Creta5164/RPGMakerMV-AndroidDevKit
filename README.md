@@ -113,6 +113,7 @@ Open the terminal(cmd) and locate `ApplicationPackager` directory.
 Then, run below command.
 
 ```
+dotnet restore
 dotnet publish -c Release --runtime RID
 ```
 - Replace `RID` part to build platform target.  
