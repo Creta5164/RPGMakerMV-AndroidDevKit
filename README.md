@@ -46,7 +46,7 @@ You must replace `YOUR_PACKAGE_NAME_HERE` to your package name.
 
 And copy `AndroidRequirements/styles.xml` to overwrite your `styles.xml`.  
 ![](img/styles.png)  
-Also copy `AndroidRequirements/styles.xml` to overwrite your `activity_main_view.xml`.
+Also copy `AndroidRequirements/activity_main_view.xml` to overwrite your `activity_main_view.xml`.
 ![](img/layout.png)
 
 If there is no red text in AndroidManifest.xml, it's a success.
@@ -127,6 +127,6 @@ dotnet publish -c Release --runtime RID
   ```
 
 If finish to build, locate terminal to upper directory.  
-and run `ApplicationPackager/bin/Release/netcoreapp0.0/yourRID/publish/ApplicationPackager`.
+and run `./ApplicationPackager/bin/Release/<.NET Core version>/<RID>/publish/ApplicationPackager`.
 
 If works successfully, make it to shell script for shortcut.
