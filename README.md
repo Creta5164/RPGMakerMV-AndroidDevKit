@@ -99,7 +99,7 @@ And some seconds later you can see your device in list!
 Click the `Inspect` and checkout console's log.
 
 More remote debug information in here.  
-https://developers.google.com/web/tools/chrome-devtools/remote-debugging
+https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews
 
 # Build `ApplicationPackager`
 
