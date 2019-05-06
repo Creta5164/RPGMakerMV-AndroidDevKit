@@ -118,8 +118,8 @@ https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webview
 
 # v1.0 to v1.1 migration guide
 
-`MVRequirements` 폴더 안의 `android-loader-for-migration.js` 파일을 받고, 기존에 있던 `android-loader.js`를 같은 이름으로 덮어씁니다.  
-Then, follow `Android studio` section's part, `SaveDataManager` guidance.
+Download `MVRequirements/android-loader-for-migration.js` file, and replace old `android-loader.js` in your project.  
+Then, follow `Android studio` section's part, `MainView` guidance.
 
 # Build `ApplicationPackager`
 
