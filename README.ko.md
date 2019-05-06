@@ -1,7 +1,13 @@
 # RPGMakerMV-AndroidDevKit
 이것은 RPG Maker MV를 안드로이드로 빌드하는 비공식 개발킷입니다.  
-2019년 02월 09일 작성됨.  
+2019년 02월 09일 작성됨. (v1.0)  
+2019년 05월 06일 업데이트 됨. (v1.1)  
 차후에는 업데이트로 인해 동작이 원활하지 않을 수 있습니다.
+
+# v1.0을 사용하셨던 분들에게
+
+v1.1에는 게임의 세이브를 실제 안드로이드 로컬 스토리지에 저장하는 기능이 생겼습니다.  
+v1.0 에서 v1.1 로 마이그레이션 하는 가이드는 **`v1.0 에서 v1.1 로 마이그레이션 하는 법`** 섹션에 있습니다.
 
 # 준비물
 
@@ -10,7 +16,6 @@
 
 # 준비
 
-Clone this repository (or download ZIP and extract) first.
 이 저장소를 복제하세요. (아니면 ZIP 파일로 받아 압축을 푸세요.)
 
 ## 설정 파일 준비하기
@@ -60,6 +65,14 @@ RPG MV 프로젝트를 이 폴더에 넣으세요.
 역시 `YOUR_PACKAGE_NAME_HERE`를 패키지 이름으로 바꿔주세요.  
 ![](img/mainview.png)
 
+그런 다음, 폴더를 우클릭 해서 New - Java Class 메뉴를 통해 새 클래스를 만들어줍니다.  
+이름은 `SaveDataManager`으로 해주세요.  
+![](img/create-new-class.png)  
+![](img/create-new-class-2.png)
+
+`MainView`에 했던 작업과 동일합니다, `AndroidRequirements/SaveDataManager.java`에 있는 내용을 만든 파일 안에 붙여넣으세요.  
+역시 `YOUR_PACKAGE_NAME_HERE`를 패키지 이름으로 바꿔야 합니다.  
+
 거의 다 끝났습니다, `assets` 폴더를 만들어봅시다.  
 (res 폴더 우클릭, `New - directory - Assets directory`)  
 창이 나타난다면, `Finish` 버튼을 클릭하세요.  
@@ -104,6 +117,11 @@ Chrome을 실행해서 주소창에 `chrome://inspect`를 칩니다.
 
 더 많은 원격 디버깅에 대한 정보는 여기에서 확인하세요.  
 https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews
+
+# v1.0 에서 v1.1 로 마이그레이션 하는 법
+
+`MVRequirements` 폴더 안의 `android-loader-for-migration.js` 파일을 받고, 기존에 있던 `android-loader.js`를 같은 이름으로 덮어씁니다.  
+그런 다음, `Android studio` 섹션의 `SaveDataManager` 부분부터 따라가세요.  
 
 # `ApplicationPackager` 빌드하기
 

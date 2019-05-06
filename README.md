@@ -1,7 +1,13 @@
 # RPGMakerMV-AndroidDevKit
 This is unofficial RPG Maker MV for Android build kit.  
-Posted in 2019-02-09.  
+Posted in 2019-02-09. (v1.0)  
+Updated in 2019-05-06. (v1.1)  
 May not work further later.
+
+# Before to read who used v1.0
+
+v1.1 has new feature saving game data to actual Android local storage.  
+Migration v1.0 to v1.1 guide is on **`v1.0 to v1.1 migration guide`** section.
 
 # Requirements
 
@@ -56,7 +62,14 @@ Let's open `MainView`.
 
 Same before works, copy `AndroidRequirements/MainView.java` contents to replace here.  
 Also must replace `YOUR_PACKAGE_NAME_HERE` to your package name.  
-![](img/mainview.png)
+![](img/mainview.png)  
+
+And create new class and name to `SaveDataManager`.  
+![](img/create-new-class.png)  
+![](img/create-new-class-2.png)
+
+Also same as `MainView` works, just copy `AndroidRequirements/SaveDataManager.java` content to paste here.  
+And must replace `YOUR_PACKAGE_NAME_HERE` to your package name.  
 
 We almost done this job, let's create `assets` directory.  
 (Right click res directory, `New - directory - Assets directory`)  
@@ -102,6 +115,11 @@ Click the `Inspect` and checkout console's log.
 
 More remote debug information in here.  
 https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews
+
+# v1.0 to v1.1 migration guide
+
+`MVRequirements` 폴더 안의 `android-loader-for-migration.js` 파일을 받고, 기존에 있던 `android-loader.js`를 같은 이름으로 덮어씁니다.  
+Then, follow `Android studio` section's part, `SaveDataManager` guidance.
 
 # Build `ApplicationPackager`
 

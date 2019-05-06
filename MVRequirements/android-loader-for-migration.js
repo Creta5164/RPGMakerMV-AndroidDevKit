@@ -69,20 +69,38 @@ StorageManager.saveToWebStorage = function(savefileId, json) {
 
 StorageManager.loadFromWebStorage = function(savefileId) {
     var key = this.webStorageKey(savefileId);
+    
+    if (!window.saveDataManager.Exists(key))
+        return LZString.decompressFromBase64(localStorage.getItem(key));
+    
     return LZString.decompressFromBase64(window.saveDataManager.Load(key));
 };
 
 StorageManager.loadFromWebStorageBackup = function(savefileId) {
     var key = this.webStorageKey(savefileId) + "bak";
+    
+    if (!window.saveDataManager.Exists(key))
+        return LZString.decompressFromBase64(localStorage.getItem(key));
+    
     return LZString.decompressFromBase64(window.saveDataManager.Load(key));
 };
 
 StorageManager.webStorageBackupExists = function(savefileId) {
     var key = this.webStorageKey(savefileId) + "bak";
-    return window.saveDataManager.Exists(key);
+    var fileExists = window.saveDataManager.Exists(key);
+    
+    if (!fileExists)
+        return !!localStorage.getItem(key);
+    
+    return fileExists;
 };
 
 StorageManager.webStorageExists = function(savefileId) {
     var key = this.webStorageKey(savefileId);
-    return window.saveDataManager.Exists(key);
+    var fileExists = window.saveDataManager.Exists(key);
+    
+    if (!fileExists)
+        return !!localStorage.getItem(key);
+    
+    return fileExists;
 };

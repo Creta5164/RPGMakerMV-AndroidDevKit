@@ -38,6 +38,7 @@ public class MainView extends AppCompatActivity {
 
         gameView = (WebView) findViewById(R.id.game_webview);
         gameView.setWebViewClient(new WebViewClient());
+        gameView.addJavascriptInterface(new SaveDataManager(gameView, MainView.this), "saveDataManager");
 
         WebSettings webSettings = gameView.getSettings();
         webSettings.setDomStorageEnabled(true);
