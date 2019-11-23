@@ -2,6 +2,7 @@
 This is unofficial RPG Maker MV for Android build kit.  
 Posted in 2019-02-09. (v1.0)  
 Updated in 2019-05-06. (v1.1)  
+Updated in 2019-11-23. (v1.1b)  
 May not work further later.
 
 # Before to read who used v1.0

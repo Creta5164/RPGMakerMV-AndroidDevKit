@@ -1,6 +1,6 @@
 package YOUR_PACKAGE_NAME_HERE;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.*;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
