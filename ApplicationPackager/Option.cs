@@ -47,13 +47,13 @@ namespace ApplicationPackager
         /// original source path
         /// </summary>
         [JsonProperty("rpgmv-path")]
-        public string RPGMVPath = "MV";
+        public string RPGMVPath = ".\\MV";
         
         /// <summary>
         /// publish path
         /// </summary>
         [JsonProperty("assets-path")]
-        public string AssetsPath = "Android\\app\\src\\main\\assets";
+        public string AssetsPath = ".\\Android\\app\\src\\main\\assets";
         
         /// <summary>
         /// logging path

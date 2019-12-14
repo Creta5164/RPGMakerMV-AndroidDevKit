@@ -25,18 +25,21 @@ namespace ApplicationPackager
         static string logFileName;
         static bool isLogFileReady;
         
+        static bool forceMode;
         static FileStream   stream;
         static StreamWriter logWriter;
         
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            if (args.Length == 0) {
-                Console.WriteLine("");
-            }
+            if (args.Length == 1 && args[0] == "-f")
+                forceMode = true;
             
             option = Option.Load();
             
             if (option == null || option.IsValid() != OptionState.OK) {
+                
+                string currentDirPath = Directory.GetCurrentDirectory();
+                
                 ShowLog(LogLevel.Error, "There is an error in the config file.");
                 ShowLog(LogLevel.Error, $"Please edit '{Option.CONFIGFILE}' to setup packaging environment.");
                 
@@ -51,13 +54,16 @@ namespace ApplicationPackager
                         break;
                 }
                 
-                ShowLog("Press any key to exit...");
+                ShowLog(LogLevel.Error, $"Current working path : {currentDirPath}");
+                ShowLog(LogLevel.Error, $"Current working path's directories=========\n{string.Join('\n', Directory.GetDirectories(currentDirPath))}");
                 
-                Console.Read();
+                if (!forceMode) {
+                    
+                    ShowLog("Press any key to exit...");
+                    Console.Read();
+                }
                 
-                Environment.Exit(1);
-                
-                return;
+                return 1;
             }
             
             InitLog();
@@ -69,19 +75,22 @@ namespace ApplicationPackager
             
             if (System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1) {
                 ShowLog(LogLevel.Warn, "Program already running!");
-                ShowLog("Press any key to exit...");
                 FinalizeLog();
                 
-                Console.Read();
+                if (!forceMode) {
+                    
+                    ShowLog("Press any key to exit...");
+                    Console.Read();
+                }
                 
-                Environment.Exit(1);
-                
-                return;
+                return 2;
             }
             
-            ShowLog("Start packaging in 5 seconds...");
-            
-            Thread.Sleep(5000);
+            if (!forceMode) {
+                
+                ShowLog("Start packaging in 5 seconds...");
+                Thread.Sleep(5000);
+            }
                 
             long changedFiles = 0,
                  addedFiles = 0,
@@ -200,15 +209,15 @@ namespace ApplicationPackager
                 ShowLog(LogLevel.Error, e.StackTrace);
                 ShowLog(LogLevel.Error, "====================================================");
                 
-                ShowLog("Press any key to exit...");
-                
                 FinalizeLog();
                 
-                Console.Read();
+                if (!forceMode) {
+                    
+                    ShowLog("Press any key to exit...");
+                    Console.Read();
+                }
                 
-                Environment.Exit(1);
-                
-                return;
+                return 3;
             }
             
             ShowLog("====================================================");
@@ -219,13 +228,15 @@ namespace ApplicationPackager
             ShowLog($"Removed file(s) : {removedFiles}");
             ShowLog("====================================================");
             
-            ShowLog("Press any key to exit...");
-                
             FinalizeLog();
             
-            Console.Read();
+            if (!forceMode) {
+                
+                ShowLog("Press any key to exit...");
+                Console.Read();
+            }
             
-            Environment.Exit(0);
+            return 0;
         }
 
         private static void ShowLog(string v)

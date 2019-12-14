@@ -3,6 +3,7 @@ This is unofficial RPG Maker MV for Android build kit.
 Posted in 2019-02-09. (v1.0)  
 Updated in 2019-05-06. (v1.1)  
 Updated in 2019-11-23. (v1.1b)  
+Updated in 2019-12-14. (v1.2)  
 May not work further later.
 
 # Before to read who used v1.0
@@ -19,17 +20,14 @@ Migration v1.0 to v1.1 guide is on **`v1.0 to v1.1 migration guide`** section.
 
 Clone this repository (or download ZIP and extract) first.
 
-## Prepare config file
+## If you are not Windows environment
 
-Run the `Start Package.bat`.  
 Other platforms need to build `ApplicationPackager` for your platforms, see [Build ApplicationPackager](#Build-ApplicationPackager)
-
-Now, you got an error text and `packager-config.json` file.
 
 ## RPG MV
 
 Import your RPG MV project directory here.  
-And change your directory name to `MV` or edit `packager-config.json` file. (change `rpgmv-path` value)
+And rename your project directory to `MV`.
 
 You must add plugin `MVRequirements/android-loader.js` to your MV project.  
 This plugin must be in first line of the plugin list.
@@ -79,20 +77,58 @@ When dialog shows up, just click `Finish` to finish Android job.
 
 ## Finalize
 
-Open `packager-config.json`, and change `assets-path`
-to your Android project's `assets` directory path.  
+### Setting automation packaging environment
 
-Then, run `Start Package.bat`.  
-Packager will copy and comparing to your MV project to your Android project.
-![](img/packager.png)
+After updated version 1.2, now able to automation build.  
+Save MV project and then click test button in Android studio will automate build with fixed part of project and install application in your device directly!  
+Let's setting up automation packaging environment!
 
-If packager is finish to work, you can see MV files successfully added
-your Android project's `assets` folder.  
-![](img/assets.png)  
+Click dropdown menu that placed right side of green hammer icon.  
+And click `Edit Configurations...` menu.
+![](img/automation1.png)
 
-If anything can't find in `assets` folder, right click `assets` folder
-and click `Synchornize 'assets'`.  
-![](img/sync.png)
+Then `Run/Debug Configurations` window will appear.  
+![](img/automation2.png)
+
+Click plus sign button in `Before launch: Gradle-aware Make` tab.  
+And select `Run External Tool` menu.  
+![](img/automation3.png)
+
+Then you can see `External Tools` window.  
+Click the plus sign button in this window.  
+![](img/automation4.png)
+
+Then you can see `Create Tool` window. (again)  
+Write `ApplicationPackager` to `Name` field.
+![](img/automation5.png)
+
+Now, we'll setup `Tool Settings` area.  
+
+---
+
+### - `Program` field
+Click folder icon and select `<your working directory>/ApplicationPackager/bin/Release/netcoreapp2.2/win-x64/publish/ApplicationPackager.exe` in your directory. (like this)  
+![](img/automation6.png)  
+
+### - `Arguments` field
+Write just `-f` only.  
+
+### - `Working directory` field
+Click folder icon and select your currently working directory.
+
+### - `Advenced Options` tab
+Check `Synchornize files after execution` and `Open console for tool output` check box.
+
+---
+
+If you finish this instructions, then you'll see like this image.  
+![](img/automation7.png)  
+
+Hit `OK` button in `Create Tool` window and `External Tools` window.  
+
+And then order that we added `External Tool` item to first in this list!  
+(Drag item or click arrow icon to change item's order)  
+![](img/automation8.png)
 
 ## Testing
 
@@ -100,11 +136,18 @@ Yes! now finally done!
 Connect your android phone to your computer via USB
 (with Developer mode enabled), and hit green play icon button.  
 ![](img/test.png)  
-then, select your device and enjoy your game.
+then, select your device and enjoy your game.  
+> Note : If you got stucked in `ApplicationPackager` build error like `Please edit 'packager-config.json' to setup packaging environment.`, you need to edit to config `packager-config.json` file manually in your working directory.
+![](img/automation9.png)  
+> - `rpgmv-path` : Must be specified RPG MV project directory path.   
+> - `assets-path` : Must be specified `assets` directory, normally placed in `<안드로이드 프로젝트 폴더>/app/src/main/` directory.
+> 
+> ![](img/automation-config.png)
 
-> ...wait, some MV plugin error occured!  
-> I never seen it before in desktop play.  
-> How can I see error log?
+
+*...wait, some MV plugin error occured!*  
+*I never seen it before in desktop play.*  
+*How can I see error log?*
 
 If you keep running your application in connected your Android device then...  
 Open the Chrome, and goto `chrome://inspect`.
@@ -148,4 +191,5 @@ dotnet publish -c Release --runtime RID
 If finish to build, locate terminal to upper directory.  
 and run `./ApplicationPackager/bin/Release/<.NET Core version>/<RID>/publish/ApplicationPackager`.
 
-If works successfully, make it to shell script for shortcut.
+If works successfully, make it to automation in your IDE when before build, check **`Finalize`** section.  
+This program contains force mode(Execution parameter : `-f`) which will ignore all user input.  

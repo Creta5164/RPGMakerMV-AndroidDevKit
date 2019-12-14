@@ -3,6 +3,7 @@
 2019년 02월 09일 작성됨. (v1.0)  
 2019년 05월 06일 업데이트 됨. (v1.1)  
 2019년 11월 23일 업데이트 됨. (v1.1b)  
+2019년 12월 14일 업데이트 됨. (v1.2)  
 차후에는 업데이트로 인해 동작이 원활하지 않을 수 있습니다.
 
 # v1.0을 사용하셨던 분들에게
@@ -19,18 +20,14 @@ v1.0 에서 v1.1 로 마이그레이션 하는 가이드는 **`v1.0 에서 v1.1 
 
 이 저장소를 복제하세요. (아니면 ZIP 파일로 받아 압축을 푸세요.)
 
-## 설정 파일 준비하기
+## 만약 Windows를 사용하지 않는다면...
 
-`Start Package.bat`을 실행하세요.  
 다른 플랫폼에서는 `ApplicationPackager` 를 빌드해야 합니다, [ApplicationPackager 빌드하기](#ApplicationPackager-빌드하기)를 확인하세요.
-
-이제 오류 화면과 함께 이 폴더에 `packager-config.json` 파일이 생깁니다.
 
 ## RPG MV
 
 RPG MV 프로젝트를 이 폴더에 넣으세요.  
-그러고나서 프로젝트 폴더를 `MV`로 변경하거나 `packager-config.json` 파일을 수정하세요.  
-(`rpgmv-path` 에 있는 것을 MV 프로젝트 폴더 이름으로)
+그러고나서 프로젝트 폴더를 `MV`로 변경하세요.  
 
 그리고 해당 프로젝트에는 `MVRequrements`의 `android-loader.js` 플러그인을 추가해야 합니다.  
 이 플러그인을 플러그인 목록 중에 제일 위에 두세요.
@@ -81,20 +78,56 @@ RPG MV 프로젝트를 이 폴더에 넣으세요.
 
 ## 마무리하기
 
-이제 다시 돌아와서 `packager-config.json` 파일을 열고 내용 중에 `assets-path`를
-안드로이드 프로젝트의 `assets` 폴더 경로로 바꿔줍니다.
+### 안드로이드 패키징 자동화 환경 설정하기
 
-저장한 다음, `Start Package.bat`을 실행하세요.  
-패키저가 이제 MV 프로젝트를 안드로이드 프로젝트로 복사하거나 비교해 파일을 정리할겁니다.  
-![](img/packager.png)
+1.2 버전 업데이트 이후로 MV 프로젝트를 안드로이드 프로젝트에 자동으로 적용해줄 수 있는 기능이 추가됐습니다.  
+MV에서 프로젝트를 저장하고, 안드로이드 스튜디오에서 바로 테스트 버튼을 누르면, 수정했던 부분이 바로 적용된 채로 테스트를 바로 할 수 있습니다!  
+이제 이 환경을 준비해봅시다.
 
-패키저의 작업이 끝나면, 안드로이드 스튜디오에서 MV 파일들이 안드로이드 프로젝트의
-`assets` 폴더 안으로 잘 정리돼서 들어갔다는 것을 알 수 있습니다.  
-![](img/assets.png)  
+초록색 망치 아이콘의 우측에 있는 드롭다운 메뉴를 열고, `Edit Configurations...`를 선택합니다.
+![](img/automation1.png)
 
-만약에 안드로이드 스튜디오에서 `assets` 폴더 안에 아무것도 보이지 않는다면
-`assets` 폴더를 우클릭하고, `Synchornize 'assets'`를 클릭하세요.  
-![](img/sync.png)
+그러면 `Run/Debug Configurations` 창이 나타납니다.  
+![](img/automation2.png)
+
+`Before launch: Gradle-aware Make` 탭 아래에 있는 `+` 아이콘을 클릭하고 `Run External Tool`를 선택하세요.  
+![](img/automation3.png)
+
+그러면 `External Tools` 창이 나타납니다.  
+이 창에서 보이는 `+` 아이콘을 클릭하세요.  
+![](img/automation4.png)
+
+그러면 `Create Tool` 창이 나타납니다. (또)  
+`Name` 항목에 `ApplicationPackager`라고 기입해주세요.
+![](img/automation5.png)
+
+이제 `Tool Settings` 부분을 설정해야 됩니다.  
+
+---
+
+### - `Program` 항목
+폴더 아이콘을 클릭하고, 현재 작업하고 있는 폴더 안의 `<작업 폴더>/ApplicationPackager/bin/Release/netcoreapp2.2/win-x64/publish/ApplicationPackager.exe` 를 선택하세요. (아래처럼요)  
+![](img/automation6.png)  
+
+### - `Arguments` 항목
+`-f`만 써주세요.  
+
+### - `Working directory` 항목
+폴더 아이콘을 클릭하고, 현재 작업하고 있는 폴더를 선택해주세요.
+
+### - `Advenced Options` 탭
+`Synchornize files after execution`과 `Open console for tool output` 체크박스를 체크해줍니다.
+
+---
+
+이 과정을 모두 마쳤다면, 아래와 같은 모습이 됩니다.  
+![](img/automation7.png)  
+
+`Create Tool`창과 `External Tools`창의 `OK`버튼을 클릭해서 두 창을 모두 닫습니다.  
+
+그런 다음, 마지막으로 추가했던 `External Tool` 항목을 제일 위로 오게 배치하세요.  
+(항목을 드래그 하거나 화살표 아이콘을 클릭해서 순서를 변경할 수 있습니다.)  
+![](img/automation8.png)
 
 ## 테스트하기
 
@@ -102,11 +135,18 @@ RPG MV 프로젝트를 이 폴더에 넣으세요.
 안드로이드 기기와 USB를 이용해 컴퓨터에 연결한 후
 (개발자 모드가 활성화 된 상태로), 초록색 재생 버튼을 클릭하세요.  
 ![](img/test.png)  
-그러고나서 연결한 기기를 선택하고 MV 게임을 확인해보세요.
+그러고나서 연결한 기기를 선택하고 MV 게임을 확인해보세요.  
+> 메모 : 만약에 `ApplicationPackager` 빌드 오류에서 `Please edit 'packager-config.json' to setup packaging environment.`와 같은 문제로 진행을 하지 못한다면, 작업 폴더에 만들어진 `packager-config.json` 설정 파일을 직접 수정해서 빌드 앱이 폴더들을 찾을 수 있도록 설정해주세요.
+![](img/automation9.png)  
+> - `rpgmv-path` : RPG MV 프로젝트가 있는 폴더를 가리켜야 합니다.  
+> - `assets-path` : 안드로이드 프로젝트 안의 `assets` 폴더를 가리켜야 합니다, 보통 `<안드로이드 프로젝트 폴더>/app/src/main/` 폴더 안에 위치합니다.
+> 
+> ![](img/automation-config.png)
 
-> ...잠깐, MV 플러그인에서 오류가 났다!  
-> 컴퓨터에서 플레이 할 때는 본 적이 없는데...  
-> 이 오류를 어떻게 자세히 확인할 수 있죠?
+
+*...잠깐, MV 플러그인에서 오류가 났다!*  
+*컴퓨터에서 플레이 할 때는 본 적이 없는데...*  
+*이 오류를 어떻게 자세히 확인할 수 있죠?*
 
 만약에 안드로이드 기기가 컴퓨터에 연결된 채로 앱을 실행하고 있는 중이라면...  
 Chrome을 실행해서 주소창에 `chrome://inspect`를 칩니다.
@@ -150,4 +190,5 @@ dotnet publish -c Release --runtime RID
 빌드가 끝났으면, 상위 폴더로 이동합니다.  
 그리고 터미널에서 `./ApplicationPackager/bin/Release/<.NET Core 버전>/<RID>/publish/ApplicationPackager`를 실행해보세요.
 
-잘 동작한다면, 터미널에서 입력했던 명령을 셸 스크립트에 작성해서 나중에 빠르게 실행할 수 있게 하세요.
+잘 동작한다면, 이것을 지금 사용중인 IDE(안드로이드 스튜디오, XCode 등)에 맞게 빌드하기 전에 이 프로그램이 실행할 수 있도록 **`마무리하기`** 섹션을 참고해서 자동화 환경을 구성하세요.  
+이 프로그램은 사용자의 입력을 무시하고 패키징 작업을 진행하는 강제 모드(실행 인자 `-f`)가 포함되어 있습니다.
