@@ -140,7 +140,7 @@ then, select your device and enjoy your game.
 > Note : If you got stucked in `ApplicationPackager` build error like `Please edit 'packager-config.json' to setup packaging environment.`, you need to edit to config `packager-config.json` file manually in your working directory.
 ![](img/automation9.png)  
 > - `rpgmv-path` : Must be specified RPG MV project directory path.   
-> - `assets-path` : Must be specified `assets` directory, normally placed in `<안드로이드 프로젝트 폴더>/app/src/main/` directory.
+> - `assets-path` : Must be specified `assets` directory, normally placed in `<Android Studio project folder>/app/src/main/` directory.
 > 
 > ![](img/automation-config.png)
 
