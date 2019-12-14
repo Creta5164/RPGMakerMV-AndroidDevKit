@@ -191,5 +191,5 @@ dotnet publish -c Release --runtime RID
 If finish to build, locate terminal to upper directory.  
 and run `./ApplicationPackager/bin/Release/<.NET Core version>/<RID>/publish/ApplicationPackager`.
 
-If works successfully, make it to automation in your IDE when before build, check **`Finalize`** section.  
+If works successfully, make it to automation in your IDE(Android Studio, XCode, etc) when before build, check **`Finalize`** section.  
 This program contains force mode(Execution parameter : `-f`) which will ignore all user input.  
