@@ -1,5 +1,5 @@
 # RPGMakerMV-AndroidDevKit
-This is unofficial RPG Maker MV and MZ for Android build kit.  
+This is unofficial RPG Maker MV for Android build kit.  
 Posted in 2019-02-09. (v1.0)  
 Updated in 2019-05-06. (v1.1)  
 Updated in 2019-11-23. (v1.1b)  
