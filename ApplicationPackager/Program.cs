@@ -298,6 +298,8 @@ namespace ApplicationPackager
             
             stream?.Close();
             stream?.Dispose();
+            
+            isLogFileReady = false;
         }
         
         static bool MD5Equals(string FirstPath, string SecondPath)
